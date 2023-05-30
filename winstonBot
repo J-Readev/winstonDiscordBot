@@ -1,0 +1,31 @@
+import discord
+import random
+
+client = discord.Client()
+calling_Winston = ["winston", "overwatch","winton","ow"]
+
+@client.event
+async def on_ready():
+    print('We have logged in as {0.user}'.format(client))
+
+winston_encouragements = [
+  "Greetings!",
+  "Excuse me for ... dropping in.",
+  "How Embarrasing!",
+  "Curious.",
+  "Don't get me angry.",
+  "Did... someone say peanut butter?",
+  "No monkey business."
+]
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+    
+    msg = message.content
+
+    if any(word in msg for word in calling_Winston):
+        await message.channel.send(random.choice(winston_encouragements))
+
+client.run('Token Goes Here')
